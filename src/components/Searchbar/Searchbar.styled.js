@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import backgroundImage from '../icons/search.svg';
 
-export const SearchBar = styled.header`
+export const SearchBarHead = styled.header`
   top: 0;
   left: 0;
   position: sticky;
@@ -31,7 +31,7 @@ export const SearchForm = styled.form`
   overflow: hidden;
 `;
 
-export const SearchFormButton = styled.button`
+export const SearchFormBtn = styled.button`
   display: inline-block;
   width: 48px;
   height: 48px;
