@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { SearchBar, SearchForm, SearchFormButton, SearchFormButtonLabel, SearchFormInput } from './Searchbar.styled'
 
 class Searchbar extends Component {
+
 render() {
   return (
     <SearchBar>
