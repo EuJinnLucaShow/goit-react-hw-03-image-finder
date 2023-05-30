@@ -19,6 +19,12 @@ class App extends Component {
     isLastPage: false,
   };
 
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState.page !== this.state.page) {
+      this.fetchImages();
+    }
+  }
+
   fetchImages = () => {
     const { query, page } = this.state;
     const API_KEY = '34187261-edb3bdfe414ee3b7adebeccc5';
@@ -30,7 +36,9 @@ class App extends Component {
         `https://pixabay.com/api/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
       )
       .then(response => {
+             
         const { hits, totalHits } = response.data;
+  
         this.setState(prevState => ({
           images: [...prevState.images, ...hits],
           page: prevState.page + 1,
@@ -46,10 +54,8 @@ class App extends Component {
   };
 
   handleSearchSubmit = query => {
-    this.setState({ query: query, page: 1, images: [], error: null }, () => {
-      this.fetchImages();
-    });
-  }
+    this.setState({ query: query, page: 1, images: [], error: null })
+  };
 
   handleImageClick = image => {
     this.setState({ selectedImage: image, showModal: true });
@@ -70,7 +76,7 @@ class App extends Component {
 
         <ImageGallery images={images} onItemClick={this.handleImageClick} />
 
-        {isLoading && <Loader />}
+        {isLoading && <Loader />}       
 
         {!isLoading && images.length > 0 && !isLastPage && (
           <Button onClick={this.fetchImages} />
