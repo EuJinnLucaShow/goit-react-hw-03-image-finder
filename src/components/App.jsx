@@ -6,7 +6,7 @@ import Button from './Button/Button';
 import Modal from './Modal/Modal';
 import Loader from './Loader/Loader';
 import { AppDiv } from './App.syled';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
@@ -86,7 +86,7 @@ handleSearchSubmit = query => {
 
     return (
       <AppDiv>
-        <ToastContainer />
+        <ToastContainer transition={Flip}/>
         <Searchbar onSubmit={this.handleSearchSubmit} />
 
         {error && <p>Error: {error}</p>}
