@@ -29,7 +29,7 @@ export const SearchForm = styled.form`
   max-width: 600px;
   background-color: #fff;
   border-radius: 3px;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 export const SearchFormBtn = styled.button`
@@ -54,7 +54,7 @@ export const SearchFormButtonLabel = styled.span`
   width: 1px;
   height: 1px;
   padding: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   clip-path: inset(50%);

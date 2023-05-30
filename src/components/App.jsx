@@ -67,10 +67,12 @@ handleSearchSubmit = query => {
 
   handleImageClick = image => {
     this.setState({ selectedImage: image, showModal: true });
+    document.body.style.overflow = 'hidden';
   };
 
   handleModalClose = () => {
     this.setState({ selectedImage: null, showModal: false });
+    document.body.style.overflow = 'auto';
   };
 
   render() {
