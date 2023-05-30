@@ -6,6 +6,8 @@ import Button from './Button/Button';
 import Modal from './Modal/Modal';
 import Loader from './Loader/Loader';
 import { AppDiv } from './App.syled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   state = {
@@ -39,6 +41,10 @@ componentDidUpdate(_prevProps, prevState) {
       )
       .then(response => {
         const { hits, totalHits } = response.data;
+
+        if (hits.length === 0) { 
+        return toast('Sorry, there are no images matching your request...', {position: toast.POSITION.TOP_CENTER, icon: "🤔"});
+        }
 
         const modifiedHits = hits.map(({ id, tags, webformatURL, largeImageURL }) => ({
       id,
@@ -80,6 +86,7 @@ handleSearchSubmit = query => {
 
     return (
       <AppDiv>
+        <ToastContainer />
         <Searchbar onSubmit={this.handleSearchSubmit} />
 
         {error && <p>Error: {error}</p>}
@@ -87,6 +94,7 @@ handleSearchSubmit = query => {
         <ImageGallery images={images} onItemClick={this.handleImageClick} />
 
         {isLoading && <Loader />}
+        
 
         {!isLoading && images.length > 0 && !isLastPage && (
           <Button onClick={this.fetchImages} />
