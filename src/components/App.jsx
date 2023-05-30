@@ -5,7 +5,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
 import Loader from './Loader/Loader';
-import { AppDiv } from './App.syled'
+import { AppDiv } from './App.syled';
 
 class App extends Component {
   state = {
@@ -19,11 +19,13 @@ class App extends Component {
     isLastPage: false,
   };
 
-  componentDidUpdate(_prevProps, prevState) {
-    if (prevState.page !== this.state.page) {
+componentDidUpdate(_prevProps, prevState) { 
+  if (prevState.query !== this.state.query) {
+    this.setState({ images: [], page: 1, isLastPage: false }, () => {
       this.fetchImages();
-    }
+    });
   }
+}
 
   fetchImages = () => {
     const { query, page } = this.state;
@@ -36,9 +38,8 @@ class App extends Component {
         `https://pixabay.com/api/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
       )
       .then(response => {
-             
         const { hits, totalHits } = response.data;
-  
+
         this.setState(prevState => ({
           images: [...prevState.images, ...hits],
           page: prevState.page + 1,
@@ -53,9 +54,9 @@ class App extends Component {
       });
   };
 
-  handleSearchSubmit = query => {
-    this.setState({ query: query, page: 1, images: [], error: null })
-  };
+handleSearchSubmit = query => {
+  this.setState({ query: query, page: 1, images: [], error: null, isLastPage: false });
+};
 
   handleImageClick = image => {
     this.setState({ selectedImage: image, showModal: true });
@@ -76,7 +77,7 @@ class App extends Component {
 
         <ImageGallery images={images} onItemClick={this.handleImageClick} />
 
-        {isLoading && <Loader />}       
+        {isLoading && <Loader />}
 
         {!isLoading && images.length > 0 && !isLastPage && (
           <Button onClick={this.fetchImages} />
