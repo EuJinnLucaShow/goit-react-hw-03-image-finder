@@ -16,6 +16,7 @@ class App extends Component {
     page: 1,
     showModal: false,
     selectedImage: null,
+    isLastPage: false,
   };
 
   fetchImages = () => {
@@ -29,10 +30,11 @@ class App extends Component {
         `https://pixabay.com/api/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
       )
       .then(response => {
-        const { hits } = response.data;
+        const { hits, totalHits } = response.data;
         this.setState(prevState => ({
           images: [...prevState.images, ...hits],
           page: prevState.page + 1,
+          isLastPage: prevState.images.length + hits.length >= totalHits,
         }));
       })
       .catch(error => {
@@ -58,7 +60,7 @@ class App extends Component {
   };
 
   render() {
-    const { images, isLoading, error, showModal, selectedImage } = this.state;
+    const { images, isLoading, error, showModal, selectedImage, isLastPage } = this.state;
 
     return (
       <AppDiv>
@@ -70,7 +72,7 @@ class App extends Component {
 
         {isLoading && <Loader />}
 
-        {!isLoading && images.length > 0 && (
+        {!isLoading && images.length > 0 && !isLastPage && (
           <Button onClick={this.fetchImages} />
         )}
 
