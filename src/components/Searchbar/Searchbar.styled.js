@@ -4,7 +4,8 @@ import backgroundImage from '../icons/search.svg';
 export const SearchBarHead = styled.header`
   top: 0;
   left: 0;
-  position: sticky;
+  position: fixed;
+  width: 100%;
   z-index: 1100;
   display: flex;
   justify-content: center;
