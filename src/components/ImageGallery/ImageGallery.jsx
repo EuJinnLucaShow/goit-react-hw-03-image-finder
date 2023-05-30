@@ -18,7 +18,6 @@ const ImageGallery = ({ images, onItemClick }) => {
     );
   }
 
-
 ImageGallery.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({

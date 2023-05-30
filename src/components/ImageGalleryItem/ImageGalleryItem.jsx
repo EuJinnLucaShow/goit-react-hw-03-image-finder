@@ -12,7 +12,7 @@ class ImageGalleryItem extends Component {
 
     return (
       <ImageGalleryLi onClick={this.handleClick}>
-        <ImageGalleryItemImg src={image.webformatURL} alt="" />
+        <ImageGalleryItemImg src={image.webformatURL} alt={ image.tags } />
       </ImageGalleryLi>
     );
   }

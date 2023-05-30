@@ -40,10 +40,17 @@ componentDidUpdate(_prevProps, prevState) {
       .then(response => {
         const { hits, totalHits } = response.data;
 
+        const modifiedHits = hits.map(({ id, tags, webformatURL, largeImageURL }) => ({
+      id,
+      tags,
+      webformatURL,
+      largeImageURL
+    }));
+
         this.setState(prevState => ({
-          images: [...prevState.images, ...hits],
+          images: [...prevState.images, ...modifiedHits],
           page: prevState.page + 1,
-          isLastPage: prevState.images.length + hits.length >= totalHits,
+          isLastPage: prevState.images.length + modifiedHits.length >= totalHits,
         }));
       })
       .catch(error => {
