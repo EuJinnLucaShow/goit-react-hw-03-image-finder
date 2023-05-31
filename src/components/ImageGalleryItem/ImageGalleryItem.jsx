@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { ImageGalleryLi, ImageGalleryItemImg } from './ImageGalleryItem.styled'
+import { ImageGalleryLi, ImageGalleryItemImg } from './ImageGalleryItem.styled';
 
-class ImageGalleryItem extends Component {
-  handleClick = () => {
-    this.props.onItemClick(this.props.image);
+const ImageGalleryItem = ({ image, onItemClick }) => {
+  const handleClick = () => {
+    onItemClick(image);
   };
 
-  render() {
-    const { image } = this.props;
-
-    return (
-      <ImageGalleryLi onClick={this.handleClick}>
-        <ImageGalleryItemImg src={image.webformatURL} alt={ image.tags } />
-      </ImageGalleryLi>
-    );
-  }
-}
+  return (
+    <ImageGalleryLi onClick={handleClick}>
+      <ImageGalleryItemImg src={image.webformatURL} alt={image.tags} />
+    </ImageGalleryLi>
+  );
+};
 
 ImageGalleryItem.propTypes = {
   image: PropTypes.shape({
     webformatURL: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired, // Assuming 'tags' is a property of the image object
   }).isRequired,
   onItemClick: PropTypes.func.isRequired,
 };
