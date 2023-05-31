@@ -60,8 +60,9 @@ export const SearchFormButtonLabel = styled.span`
 `
 export const SearchFormInput = styled.input`
   display: inline-block;
-  width: 100%;
+  width: 100%;  
   font: inherit;
+  line-height: initial;
   font-size: 20px;
   border: none;
   outline: none;
