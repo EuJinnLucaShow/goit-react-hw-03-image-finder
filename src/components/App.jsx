@@ -22,11 +22,11 @@ class App extends Component {
   };
 
 componentDidUpdate(_prevProps, prevState) { 
-  if (prevState.query !== this.state.query) {
-    this.setState({ images: [], page: 1, isLastPage: false }, () => {
-      this.fetchImages();
-    });
-  }
+  if (prevState.query !== this.state.query) {       
+      this.setState({ images: [], page: 1, isLastPage: false }, () => {
+  this.fetchImages();
+});
+    }  
 }
 
   fetchImages = () => {
@@ -67,7 +67,10 @@ componentDidUpdate(_prevProps, prevState) {
       });
   };
 
-handleSearchSubmit = query => {
+  handleSearchSubmit = query => {
+      if (this.state.query === query) {
+      return;
+    }
   this.setState({ query: query, page: 1, images: [], error: null, isLastPage: false });
 };
 

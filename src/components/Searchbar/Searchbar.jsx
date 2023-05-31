@@ -3,25 +3,27 @@ import PropTypes from 'prop-types';
 import { SearchBarHead, SearchForm, SearchFormBtn, SearchFormButtonLabel, SearchFormInput } from './Searchbar.styled'
 
 class Searchbar extends Component {
+ 
   state = {
     query: '',
   };
 
-  handleChange = event => {    
+  handleChange = event => {     
     this.setState({ query: event.target.value });    
   };
 
-  handleSubmit = event => {
+  handleSubmit = event => {    
     event.preventDefault();
     if (!this.state.query.trim()) { 
       return
     }
     this.props.onSubmit(this.state.query);
+    // this.setState({ query: '' });
   };
 
   render() {
-    const { query } = this.state;
-
+    // const { query } = this.state;
+    
     return (
       <SearchBarHead>
         <SearchForm onSubmit={this.handleSubmit}>
@@ -34,7 +36,7 @@ class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={query}
+            value={this.state.query}
             onChange={this.handleChange}
           />
         </SearchForm>
